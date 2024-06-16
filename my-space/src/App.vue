@@ -1,28 +1,45 @@
 <template>
   <div id="app">
-    <ul>
-      <li><router-link to="/">Home</router-link></li>
-      <li><router-link to="/gallery">Gallery</router-link></li>
-      <li><router-link to="/about">About</router-link></li>
-    </ul>
 
-    <router-view></router-view>
+    <NavBar/>
+    <ContentZone/>
+    <FooterZone text="Copyright 2024 by Chawengwit" @onTime="onTime"/>
+    <span>{{ time }}</span>
+
+
   </div>
 </template>
 
 <script>
+import NavBar from './components/NavBar.vue';
+import ContentZone from './components/ContentZone.vue';
+import FooterZone from './components/FooterZone.vue';
+import moment from 'moment'
+
 export default {
-  name: "app"
+  name: "app",
+  methods: {
+    onTime(returnTime) {
+      this.time = moment(returnTime).format("MM/DD/YYYY hh:mm:ss");
+    }
+  },
+
+  data() {
+    return {
+      time: ""
+    }
+  },
+
+  components: {
+    NavBar,
+    ContentZone,
+    FooterZone
+  }
 }
 </script>
 
 <style>
-  ul{
-    margin: 0;
-    padding: 0;
-  }
-  li{
-    display: inline;
-    margin-right: 10px;
+  *{
+    box-sizing: border-box;
   }
 </style>
